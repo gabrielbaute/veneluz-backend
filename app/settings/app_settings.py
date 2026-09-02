@@ -11,47 +11,47 @@ class Settings(BaseSettings):
     """
     Settings class for environtment variables.
     """
-    # ------------ APP INFO ------------  
+    # ------------ APP INFO ------------
     APP_NAME: str = "VeneLuz"
     APP_VERSION: str =  __version__
 
-    # ------------ Directories and config path ------------  
+    # ------------ Directories and config path ------------
     # Directory and path config
     BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent
     INSTANCE_DIR: Path = BASE_DIR / "instance"
     LOGS_DIR: Path = BASE_DIR / "logs"
-    
-    
+
+
     # ----------- LOGGING -------------
     LOG_LEVEL: str = "INFO"
-    
+
     # ----------- API -----------------
-    API_HOST: str = "127.0.0.1"  
-    API_PORT: int = 8000  
-    API_RELOAD: bool = False  
+    API_HOST: str = "127.0.0.1"
+    API_PORT: int = 8000
+    API_RELOAD: bool = False
     API_LOG_LEVEL: str = "info"
 
     # ----------- DATABASE ------------
-    DATABASE_URL: str = str(f"sqlite+aiosqlite:///{INSTANCE_DIR / f'{APP_NAME}_database.db'}")  
-    DATABASE_ECHO: bool = False  
-    DATABASE_POOL_SIZE: int = 5  
-    DATABASE_POOL_RECYCLE: int = 3600  
-    DATABASE_POOL_TIMEOUT: int = 30  
+    DATABASE_URL: str = str(f"sqlite+aiosqlite:///{INSTANCE_DIR / f'{APP_NAME}_database.db'}")
+    DATABASE_ECHO: bool = False
+    DATABASE_POOL_SIZE: int = 5
+    DATABASE_POOL_RECYCLE: int = 3600
+    DATABASE_POOL_TIMEOUT: int = 30
     DATABASE_POOL_PRE_PING: bool = True
 
     # ----------- WEBHOOKS ------------
-    NTFY_TOPIC: str
-    NTFY_URL: str
+    NTFY_TOPIC: str = "NTFY"
+    NTFY_URL: str = "NTFY"
 
-    # ------------ SEGURIDAD ------------  
-    SECRET_KEY: str = "placeholder-dev-key"  
-    SECURITY_PASSWORD_SALT: str = "placeholder-salt"  
-    JWT_SECRET_KEY: str = "placeholder-jwt-key"  
-    ALGORITHM: str = "HS256"  
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60  
+    # ------------ SEGURIDAD ------------
+    SECRET_KEY: str = "placeholder-dev-key"
+    SECURITY_PASSWORD_SALT: str = "placeholder-salt"
+    JWT_SECRET_KEY: str = "placeholder-jwt-key"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     REFRESH_TOKEN_EXPIRE_MINUTES: int = 10080
 
-    # ------------ Mail ------------ 
+    # ------------ Mail ------------
     MAIL_HOST: str = "smtp.google.com"
     MAIL_PORT: int = 587
     MAIL_USERNAME: str = "yourmail@gmail.com"
@@ -59,10 +59,10 @@ class Settings(BaseSettings):
     MAIL_USE_TLS: bool = True
     MAIL_USE_SSL: bool = False
 
-    model_config = SettingsConfigDict(  
-        env_file=".env",  
-        env_file_encoding="utf-8",  
-        extra="ignore"  
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore"
     )
 
     def __init__(self, **values):
@@ -71,7 +71,7 @@ class Settings(BaseSettings):
         """
         super().__init__(**values)
         self.ensure_dirs()
-        
+
         if not self.DATABASE_URL:
             self.DATABASE_URL = f"sqlite+aiosqlite:///{self.INSTANCE_DIR / f'{self.APP_NAME}_database.db'}"
 
