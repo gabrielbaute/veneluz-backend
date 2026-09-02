@@ -46,7 +46,7 @@ class AppCustomLogger:
         if not logs_dir.exists():
             logs_dir.mkdir(parents=True, exist_ok=True)
 
-        log_file: Path = logs_dir / "gabsbooks_server.log"
+        log_file: Path = logs_dir / "veneluz_server.log"
         log_format = "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
 
         rotate_handler = RotatingFileHandler(
