@@ -13,7 +13,8 @@ class ElectricEventSQLModel(SQLModel, table=True):
         id (UUID): ID de registro de la falla/evento eléctrico.
         start_timestamp (datetime): Marca de tiempo de inicio del evento.
         end_timestamp (datetime): Marca de tiempo de finalización del evento.
-        location (str): Coordenadas desde las que se registró el evento.
+        latitude (float): Latitud de la ubicación desde donde se emite el registro de evento.
+        longitude (float): Longitud de la ubicación desde donde se emite el registro de evento.
         event_type (EventType): Tipo de evento, corte o fluctuación.
         fail_cause (FailCause): Tipo de causa de la falla/corte.
     """
@@ -22,6 +23,7 @@ class ElectricEventSQLModel(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     start_timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False,)
     end_timestamp: datetime = Field(nullable=True)
-    location: str = Field(nullable=False)
+    latitude: float = Field(nullable=False)
+    longitude: float = Field(nullable=False)
     event_type: EventType = Field(default=EventType.CORTE)
     fail_cause: FailCause = Field(default=FailCause.DESCONOCIDA)
