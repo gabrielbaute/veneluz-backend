@@ -13,14 +13,16 @@ class ElectricEventCreate(BaseModel):
         id (UUID): ID de registro de la falla/evento eléctrico.
         start_timestamp (datetime): Marca de tiempo de inicio del evento.
         end_timestamp (Optional[datetime]): Marca de tiempo de finalización del evento.
-        location (str): Coordenadas desde las que se registró el evento.
+        latitude (float): Latitud de la ubicación desde donde se emite el registro de evento.
+        longitude (float): Longitud de la ubicación desde donde se emite el registro de evento.
         event_type (EventType): Tipo de evento, corte o fluctuación.
         fail_cause (FailCause): Tipo de causa de la falla/corte.
     """
     id: UUID
     start_timestamp: datetime
     end_timestamp: Optional[datetime] = None
-    location: str
+    latitude: float
+    longitude: float
     event_type: EventType = EventType.CORTE
     fail_cause: FailCause = FailCause.DESCONOCIDA
 
@@ -33,13 +35,15 @@ class ElectricEventUpdate(BaseModel):
     Attributes:
         start_timestamp ( Optional[datetime]): Marca de tiempo de inicio del evento.
         end_timestamp (Optional[datetime]): Marca de tiempo de finalización del evento.
-        location (Optional[str]): Coordenadas desde las que se registró el evento.
+        latitude (Optional[float]): Latitud de la ubicación desde donde se emite el registro de evento.
+        longitude (Optional[float]): Longitud de la ubicación desde donde se emite el registro de evento.
         event_type (Optional[EventType]): Tipo de evento, corte o fluctuación.
         fail_cause (Optional[FailCause]): Tipo de causa de la falla/corte.
     """
     start_timestamp: Optional[datetime] = None
     end_timestamp: Optional[datetime] = None
-    location: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
     event_type: Optional[EventType] = None
     fail_cause: Optional[FailCause] = None
 
@@ -53,14 +57,16 @@ class ElectricEventResponse(BaseModel):
         id (UUID): ID de registro de la falla/evento eléctrico.
         start_timestamp (datetime): Marca de tiempo de inicio del evento.
         end_timestamp (Optional[datetime]): Marca de tiempo de finalización del evento.
-        location (str): Coordenadas desde las que se registró el evento.
+        latitude (float): Latitud de la ubicación desde donde se emite el registro de evento.
+        longitude (float): Longitud de la ubicación desde donde se emite el registro de evento.
         event_type (EventType): Tipo de evento, corte o fluctuación.
         fail_cause (FailCause): Tipo de causa de la falla/corte.
     """
     id: UUID
     start_timestamp: datetime
     end_timestamp: Optional[datetime] = None
-    location: str
+    latitude: float
+    longitude: float
     event_type: EventType
     fail_cause: FailCause
 
